@@ -9,3 +9,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+.average-time {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
