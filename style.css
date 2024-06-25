@@ -70,3 +70,27 @@ h1 {
     background-color: #ff00ff;
     color: #1a1a1a;
 }
+document.addEventListener("DOMContentLoaded", function() {
+    const seedBoxes = document.querySelectorAll(".seed-box");
+    const averageTimeElement = document.getElementById("average-time");
+    let totalSeconds = 0;
+    let count = 0;
+
+    seedBoxes.forEach(box => {
+        const timeText = box.innerHTML.match(/Complete in: (\d+:\d+)/);
+        if (timeText) {
+            const [minutes, seconds] = timeText[1].split(':').map(Number);
+            totalSeconds += (minutes * 60) + seconds;
+            count++;
+        }
+    });
+
+    if (count > 0) {
+        const averageSeconds = totalSeconds / count;
+        const averageMinutes = Math.floor(averageSeconds / 60);
+        const remainingSeconds = Math.floor(averageSeconds % 60);
+        averageTimeElement.textContent = `${String(averageMinutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    } else {
+        averageTimeElement.textContent = "00:00";
+    }
+});
